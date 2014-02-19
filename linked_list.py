@@ -45,8 +45,8 @@ class mystack:
         if not currentNode:
             return
         if currentNode == deletingnode:
-            self.head = deletingnode.next
-            self.len = self.len - 1
+            self.pop()
+            return
         while True:
             if not currentNode:
                 return
