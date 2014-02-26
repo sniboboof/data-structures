@@ -15,7 +15,7 @@ class testHash(unittest.TestCase):
         self.assertEqual(self.samplehash.hashin(""), 0)
         
         self.samplehash = myhash.ezHash(20)
-        self.assertEqual(self.samplehash.hashin("ab"), ord('a')+ord('b')%20)
+        self.assertEqual(self.samplehash.hashin("ab"), (ord('a')+ord('b')) % 20)
         mess = """abcdefghijklmnopqrstuvwxyz The quick brown fox jumps over the lazy dog lorem ipsum arghwarblesjfhurhp./.,jxcviwpiou\n\r ''' "ffdhhowuo\\sdfo " ' ""' """
         total = 0
         for c in mess:
@@ -24,12 +24,28 @@ class testHash(unittest.TestCase):
     
     def testSetGetSingle(self):
         self.samplehash = myhash.ezHash(20)
+        
+        self.assertEqual(self.samplehash.get("potato"), None)
+        
         samplewords = ("aaa", "aab", "aac", "aad")
         for i in range(len(samplewords)):
             self.samplehash.set(samplewords[i], i)
         
         for i in range(len(samplewords)):
             self.assertEqual(self.samplehash.get(samplewords[i]), i)
+            self.assertRaises(KeyError, lambda: self.samplehash.buckets[(i+1) % 20][samplewords[i]])
     
     def testSetGetMultiple(self):
-        pass
+        self.samplehash = myhash.ezHash(1024)
+        wordfile = open("/usr/share/dict/words", "r")
+        samplewords = wordfile.read().split()
+        wordfile.close()
+        
+        for i in range(len(samplewords)):
+            self.samplehash.set(samplewords[i], i)
+        
+        for i in range(len(samplewords)):
+            self.assertEqual(self.samplehash.get(samplewords[i]), i)
+
+if __name__ == "__main__":
+    unittest.main()
