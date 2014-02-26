@@ -14,7 +14,7 @@ class testHash(unittest.TestCase):
         self.assertEqual(self.samplehash.hashin("a"), ord('a')%4)
         self.assertEqual(self.samplehash.hashin(""), 0)
         
-        self.samplehash = myhas.ezHash(20)
+        self.samplehash = myhash.ezHash(20)
         self.assertEqual(self.samplehash.hashin("ab"), ord('a')+ord('b')%20)
         mess = """abcdefghijklmnopqrstuvwxyz The quick brown fox jumps over the lazy dog lorem ipsum arghwarblesjfhurhp./.,jxcviwpiou\n\r ''' "ffdhhowuo\\sdfo " ' ""' """
         total = 0
@@ -22,8 +22,14 @@ class testHash(unittest.TestCase):
             total += ord(c)
         self.assertEqual(self.samplehash.hashin(mess), total%20)
     
-    def testSet(self):
-        pass
+    def testSetGetSingle(self):
+        self.samplehash = myhash.ezHash(20)
+        samplewords = ("aaa", "aab", "aac", "aad")
+        for i in range(len(samplewords)):
+            self.samplehash.set(samplewords[i], i)
+        
+        for i in range(len(samplewords)):
+            self.assertEqual(self.samplehash.get(samplewords[i]), i)
     
-    def testGet(self):
+    def testSetGetMultiple(self):
         pass
