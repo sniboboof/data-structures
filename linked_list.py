@@ -6,7 +6,6 @@ class mynode:
     def __init__(self, init, tail):
         self.value = init
         self.linknext = tail
-    
 
 
 class mystack:
@@ -74,6 +73,7 @@ class mystack:
         mess += ')'
         return mess
 
+
 class TestLinkedList(unittest.TestCase):
     
     def test_mylist(self):
@@ -118,6 +118,7 @@ class TestLinkedList(unittest.TestCase):
             alist.insert(i)
         alist.insert("Wyoming")
         self.assertEqual(str(alist), """('Wyoming', 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)""")
+
 
 if __name__ == '__main__':
     unittest.main()
