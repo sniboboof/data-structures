@@ -1,5 +1,7 @@
 import unittest
 import bst
+import cProfile
+import time
 
 class TestTree(unittest.TestCase):
 
@@ -74,5 +76,32 @@ class TestTree(unittest.TestCase):
         myTree.insert(6)
         self.assertEqual(myTree.balance(), -1)
 
+def perfectRange(start, end):
+    midi = (end-start)/2
+    yield midi+start
+    yield perfectRange(start, start+midi)
+    yield perfectRange(start+midi+1, end)
+
 if __name__ == "__main__":
+    print "testing best and worst case speeds for values in range(2^9 - 1)"
+    
+    myTree = bst.treeNode()
+    for good in perfectRange(0, 511):
+        myTree.insert(good)
+    
+    start = time.time()
+    myTree.contains(510)
+    stop = time.time()
+    
+    print str(stop-start)
+    
+    myTree = bst.treeNode()
+    for bad in xrange(511):
+        myTree.insert(bad)
+    
+    start = time.time()
+    myTree.contains(510)
+    stop = time.time()
+    
+    print str(stop-start)
     unittest.main()
