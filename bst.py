@@ -40,19 +40,19 @@ class treeNode():
             return 0
         else:
             return self.left.size()+self.right.size()+1
-    
+
     def depth(self):
         if self.value is None:
             return 0
         else:
             return max(self.left.size(), self.right.size()) + 1
-    
+
     def balance(self):
         if self.value is None:
             return 0
         else:
             return self.left.size() - self.right.size()
-    
+
     def get_dot(self):
         """return the tree with root 'self' as a dot graph for visualization"""
         return "digraph G{\n%s}" % ("" if self.value is None else (

@@ -79,15 +79,15 @@ class TestTree(unittest.TestCase):
 
 def perfectRange(start, end):
     answer = []
-    
+
     perfectCenter(start, end, answer)
-    
+
     return answer
 
 def perfectCenter(start, end, answer):
     midi = (end-start)/2
     answer.append(midi+start)
-    
+
     if midi > 0:
         perfectCenter(start, start+midi, answer)
     if start+midi != end-1:
@@ -95,41 +95,41 @@ def perfectCenter(start, end, answer):
 
 if __name__ == "__main__":
     print "testing best and worst case speeds for values in range(2^9 - 1)"
-    
+
     myTree = bst.treeNode()
     for good in perfectRange(0, 511):
         myTree.insert(good)
-    
+
     start = time.time()
     myTree.contains(510)
     stop = time.time()
-    
+
     print str(stop-start)
-    myfile = open("good.dot", "w")
-    myfile.write(myTree.get_dot())
-    myfile.close()
-    
+    # myfile = open("good.dot", "w")
+    # myfile.write(myTree.get_dot())
+    # myfile.close()
+
     myTree = bst.treeNode()
     for bad in xrange(511):
         myTree.insert(bad)
-    
+
     start = time.time()
     myTree.contains(510)
     stop = time.time()
-    
+
     print str(stop-start)
-    myfile = open("bad.dot", "w")
-    myfile.write(myTree.get_dot())
-    myfile.close()
-    
+    # myfile = open("bad.dot", "w")
+    # myfile.write(myTree.get_dot())
+    # myfile.close()
+
     random.seed()
     myrange = range(511)
     random.shuffle(myrange)
     myTree = bst.treeNode()
     for i in myrange:
         myTree.insert(i)
-    myfile = open("other.dot", "w")
-    myfile.write(myTree.get_dot())
-    myfile.close()
-    
+    # myfile = open("other.dot", "w")
+    # myfile.write(myTree.get_dot())
+    # myfile.close()
+
     unittest.main()
