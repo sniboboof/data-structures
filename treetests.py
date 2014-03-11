@@ -2,6 +2,7 @@ import unittest
 import bst
 import cProfile
 import time
+import random
 
 class TestTree(unittest.TestCase):
 
@@ -77,10 +78,20 @@ class TestTree(unittest.TestCase):
         self.assertEqual(myTree.balance(), -1)
 
 def perfectRange(start, end):
+    answer = []
+    
+    perfectCenter(start, end, answer)
+    
+    return answer
+
+def perfectCenter(start, end, answer):
     midi = (end-start)/2
-    yield midi+start
-    yield perfectRange(start, start+midi)
-    yield perfectRange(start+midi+1, end)
+    answer.append(midi+start)
+    
+    if midi > 0:
+        perfectCenter(start, start+midi, answer)
+    if start+midi != end-1:
+        perfectCenter(start+midi+1, end, answer)
 
 if __name__ == "__main__":
     print "testing best and worst case speeds for values in range(2^9 - 1)"
@@ -94,6 +105,9 @@ if __name__ == "__main__":
     stop = time.time()
     
     print str(stop-start)
+    myfile = open("good.dot", "w")
+    myfile.write(myTree.get_dot())
+    myfile.close()
     
     myTree = bst.treeNode()
     for bad in xrange(511):
@@ -104,4 +118,18 @@ if __name__ == "__main__":
     stop = time.time()
     
     print str(stop-start)
+    myfile = open("bad.dot", "w")
+    myfile.write(myTree.get_dot())
+    myfile.close()
+    
+    random.seed()
+    myrange = range(511)
+    random.shuffle(myrange)
+    myTree = bst.treeNode()
+    for i in myrange:
+        myTree.insert(i)
+    myfile = open("other.dot", "w")
+    myfile.write(myTree.get_dot())
+    myfile.close()
+    
     unittest.main()
