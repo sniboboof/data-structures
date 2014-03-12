@@ -37,3 +37,9 @@ depth() returns the depth of the deepest node in the tree
 balance() returns a comparison of the depths of each side of the tree, giving a rough estimate of the tree's efficiency
 
 note that the tree produces empty nodes at the ends of each branch in case they need to be inserted into later (leaves). this is somewhat memory inefficient and may be changed later.
+
+tree traversal algorithms: in_order, pre_order, post_order, and breadth_first
+in order produces sorted values
+pre_order prints the root, works down the left side, then moves right
+post_order starts at the bottom of the left side, then goes right and works its way up
+breadth_first starts at the root, then moves down to each level, moving from left to right
