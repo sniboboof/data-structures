@@ -43,3 +43,5 @@ in order produces sorted values
 pre_order prints the root, works down the left side, then moves right
 post_order starts at the bottom of the left side, then goes right and works its way up
 breadth_first starts at the root, then moves down to each level, moving from left to right
+
+travis badge: https://travis-ci.org/sniboboof/data-structures.png?branch=master
