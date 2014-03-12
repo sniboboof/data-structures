@@ -166,10 +166,11 @@ class TestTree(unittest.TestCase):
                   92, 94, 21, 30, 33, 36, 39, 46, 48, 91, 95, 29,
                   38, 41, 45, 51, 40, 44, 49, 55, 43, 50, 52, 53,
                   54]
-        i=0
-        for a in myTree.breadth_first():
-            self.assertEqual(a, answer[i])
-            i+=1
+        gen = myTree.breadth_first()
+        for i in range(100):
+            print answer[i]
+            self.assertEqual(gen.next(), answer[i])
+        self.assertRaises(StopIteration, gen.next())
 
 def perfectRange(start, end):
     answer = []
