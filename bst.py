@@ -8,8 +8,6 @@ class treeNode():
         self.value = None
 
     def insert(self, comparable):
-        newLocation = None
-
         #None is technically comparable but no.
         if comparable is None:
             raise TypeError
@@ -23,7 +21,7 @@ class treeNode():
         elif comparable > self.value:
             self.right.insert(comparable)
         else: #trying to insert two of the same value
-            raise IndexError
+            return
 
     def contains(self, comparable):
         if self.value is None:
@@ -45,13 +43,74 @@ class treeNode():
         if self.value is None:
             return 0
         else:
-            return max(self.left.size(), self.right.size()) + 1
+            return max(self.left.depth(), self.right.depth()) + 1
 
     def balance(self):
         if self.value is None:
             return 0
         else:
-            return self.left.size() - self.right.size()
+            return self.left.depth() - self.right.depth()
+
+    def in_order(self):
+        if self.value is None:
+            return
+        for i in self.left.in_order():
+            yield i
+        yield self.value
+        for i in self.right.in_order():
+            yield i
+
+    def pre_order(self):
+        if self.value is None:
+            return
+        yield self.value
+        for i in self.left.pre_order():
+            yield i
+        for i in self.right.pre_order():
+            yield i
+
+    def post_order(self):
+        if self.value is None:
+            return
+        for i in self.left.post_order():
+            yield i
+        for i in self.right.post_order():
+            yield i
+        yield self.value
+
+    def breadth_first(self):
+        for i in self._breadth_first():
+            yield i[1].value
+
+    #helper function for breadth first, needs to return height and node
+    def _breadth_first(self,):
+        if self.value is None:
+            return
+        lGen = self.left._breadth_first()
+        rGen = self.right._breadth_first()
+        try:
+            lheight, lindex = lGen.next()
+        except StopIteration:
+            return
+        try:
+            rheight, rindex = rGen.next()
+        except StopIteration:
+            return
+        for height in range(1, self.depth()):
+            while lindex.value is not None or rindex.value is not None:
+                while height == lheight:
+                    yield lheight+1, lindex
+                    try:
+                        lheight, lindex = lGen.next()
+                    except StopIteration:
+                        return
+
+                while height == rheight:
+                    yield rheight+1, rindex
+                    try:
+                        rheight, rindex = rGen.next()
+                    except StopIteration:
+                        return
 
     def get_dot(self):
         """return the tree with root 'self' as a dot graph for visualization"""
