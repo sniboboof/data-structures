@@ -86,31 +86,36 @@ class treeNode():
     def _breadth_first(self,):
         if self.value is None:
             return
+        yield 1, self
         lGen = self.left._breadth_first()
         rGen = self.right._breadth_first()
+        lindex=None
+        rindex=None
+        lheight=1
+        rheight=1
         try:
             lheight, lindex = lGen.next()
         except StopIteration:
-            return
+            lheight=-1
         try:
             rheight, rindex = rGen.next()
         except StopIteration:
-            return
+            rheight=-1
         for height in range(1, self.depth()):
-            while lindex.value is not None or rindex.value is not None:
+            while lheight==height or rheight==height:
                 while height == lheight:
                     yield lheight+1, lindex
                     try:
                         lheight, lindex = lGen.next()
                     except StopIteration:
-                        return
+                        lheight=-1
 
                 while height == rheight:
                     yield rheight+1, rindex
                     try:
                         rheight, rindex = rGen.next()
                     except StopIteration:
-                        return
+                        rheight=-1
 
     def get_dot(self):
         """return the tree with root 'self' as a dot graph for visualization"""

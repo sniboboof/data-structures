@@ -168,9 +168,8 @@ class TestTree(unittest.TestCase):
                   54]
         gen = myTree.breadth_first()
         for i in range(100):
-            print answer[i]
             self.assertEqual(gen.next(), answer[i])
-        self.assertRaises(StopIteration, gen.next())
+        self.assertRaises(StopIteration, lambda:(gen.next()))
 
 def perfectRange(start, end):
     answer = []
