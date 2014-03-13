@@ -36,6 +36,8 @@ depth() returns the depth of the deepest node in the tree
 
 balance() returns a comparison of the depths of each side of the tree, giving a rough estimate of the tree's efficiency
 
+delete(value) searches for the value in the tree and, if it finds the value, deletes the node and alters related references to it to keep the tree properly connected.
+
 note that the tree produces empty nodes at the ends of each branch in case they need to be inserted into later (leaves). this is somewhat memory inefficient and may be changed later.
 
 tree traversal algorithms: in_order, pre_order, post_order, and breadth_first
