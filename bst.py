@@ -121,12 +121,12 @@ class treeNode():
         """public function, finds the node and, if it exists,
         removes references to it and finds a new parent for its
         children"""
-        if value is None:
-            #empty tree, nothing to delete
-            return
-        elif value == self.value:
+        if value == self.value:
             #it's a special case when we have to delete the root
-            self._delete_node()
+            nodetocopy=self._delete_node()
+            self.value = nodetocopy.value
+            self.right = nodetocopy.right
+            self.left = nodetocopy.left
         else:
             self._delete_find(value)
         return
@@ -138,11 +138,10 @@ class treeNode():
         if self.value is None:
             #hit the end without finding the value
             return
-        nexttry = None
 
         if value < self.value:
             if self.left.value == value:
-                #must delete all reference to the node we're deleting
+                #must delete all the reference to the node we're deleting
                 self.left = self.left._delete_node()
             else:
                 self.left._delete_find(value)

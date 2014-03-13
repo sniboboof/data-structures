@@ -180,12 +180,19 @@ class TestTree(unittest.TestCase):
         for i in sample:
             myTree.insert(i)
 
-        for i in random.sample(xrange(100), 24):
+        # myfile = open("other.dot", "w")
+        # myfile.write(myTree.get_dot())
+        # myfile.close()
+
+        for i in random.sample(xrange(100), 100):
             answer.remove(i)
             for n in range(2):
                 myTree.delete(i)
                 gen = myTree.in_order()
                 for j in answer:
+                    # myfile = open("potato.dot", "w")
+                    # myfile.write(myTree.get_dot())
+                    # myfile.close()
                     self.assertEqual(j, gen.next())
 
 def perfectRange(start, end):
