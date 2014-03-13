@@ -117,6 +117,64 @@ class treeNode():
                     except StopIteration:
                         rheight=-1
 
+    def delete(self, value):
+        """public function, finds the node and, if it exists,
+        removes references to it and finds a new parent for its
+        children"""
+        if value is None:
+            #empty tree, nothing to delete
+            return
+        elif value == self.value:
+            #it's a special case when we have to delete the root
+            self._delete_node()
+        else:
+            self._delete_find(value)
+        return
+
+    def _delete_find(self, value):
+        """recursively finds the node with the right value
+        .delete handles the root, so we already know self is not
+        the value"""
+        if self.value is None:
+            #hit the end without finding the value
+            return
+        nexttry = None
+
+        if value < self.value:
+            if self.left.value == value:
+                #must delete all reference to the node we're deleting
+                self.left = self.left._delete_node()
+            else:
+                self.left._delete_find(value)
+        else: #value must be more than self.value
+            if self.right.value == value:
+                self.right = self.right._delete_node()
+            else:
+                self.right._delete_find(value)
+
+    def _delete_node(self):
+        if self.left.value is None and self.right.value is None:
+            return treeNode()
+        elif self.left.value is None:
+            return self.right
+        elif self.right.value is None:
+            return self.left
+        else:
+            #there are nodes to the left and right, so life gets complex
+            replacenodeparent = self
+            if replacenodeparent.left.right.value is None:
+                replacenode = replacenodeparent.left
+                self.value = replacenode.value
+                replacenodeparent.left = replacenode._delete_node()
+                return self
+            replacenodeparent = replacenodeparent.left
+            while replacenodeparent.right.right.value is not None:
+                replacenodeparent = replacenodeparent.right
+            replacenode = replacenodeparent.right
+            self.value = replacenode.value
+            replacenodeparent.right = replacenode._delete_node()
+            return self
+
     def get_dot(self):
         """return the tree with root 'self' as a dot graph for visualization"""
         return "digraph G{\n%s}" % ("" if self.value is None else (

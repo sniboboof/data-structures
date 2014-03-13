@@ -171,6 +171,23 @@ class TestTree(unittest.TestCase):
             self.assertEqual(gen.next(), answer[i])
         self.assertRaises(StopIteration, lambda:(gen.next()))
 
+    def testDelete(self):
+        myTree = bst.treeNode()
+        sample = range(100)
+        random.shuffle(sample)
+        answer = range(100)
+
+        for i in sample:
+            myTree.insert(i)
+
+        for i in random.sample(xrange(100), 24):
+            answer.remove(i)
+            for n in range(2):
+                myTree.delete(i)
+                gen = myTree.in_order()
+                for j in answer:
+                    self.assertEqual(j, gen.next())
+
 def perfectRange(start, end):
     answer = []
 
