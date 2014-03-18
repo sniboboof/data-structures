@@ -50,6 +50,8 @@ travis badge: https://travis-ci.org/sniboboof/data-structures.png?branch=master
 
 SORTING ALGORITHMS
 
-INSERT: insertsort.py has the simple insert sort algorithm as a function
+SELECTION: simplesorting.py has the simple selection sort algorithm
+
+INSERT: simplesorting.py has the simple insert sort algorithm as a function
 it sorts the input in place and also returns it
-tested by inserttest.py, which also performs a naive runtime test on ranges 1000 through 6000, which is enough to clearly show that the speed increases by more for each consecutive 1000 value increase
+tested by sorttests.py, which also performs a naive runtime test on ranges 1000 through 6000, which is enough to clearly show that the speed increases by more for each consecutive 1000 value increase

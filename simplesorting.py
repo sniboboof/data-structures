@@ -1,4 +1,4 @@
-def insertsort(mylist):
+def selectionsort(mylist):
     for i in xrange(len(mylist)):
         ansindex = i
         for j in xrange(i+1, len(mylist)):
