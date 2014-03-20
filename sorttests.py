@@ -1,9 +1,29 @@
 import simplesorting
+import mergesort
 import unittest
 import random
 import time
 
+def sorttestframework(sortfunction):
+    answer = sortfunction([])
+    assert answer == []
+    answer = sortfunction([0])
+    assert answer == [0]
+    answer = sortfunction([0, 1])
+    assert answer == [0, 1]
+    answer = sortfunction([1, 0])
+    assert answer == [0, 1]
+    answer = sortfunction([-1, 1, 0])
+    assert answer == [-1, 0, 1]
+    answer = sortfunction([5, 4, 2, 4, 7, -25, None, 12])
+    assert answer == [None, -25, 2, 4, 4, 5, 7, 12]
+    sortinput = range(100)
+    random.shuffle(sortinput)
+    answer = sortfunction(sortinput)
+    assert answer == range(100)
+
 class sortCase(unittest.TestCase):
+
     def testSelectionSort(self):
         answer = simplesorting.selectionsort([])
         assert answer == []
@@ -40,6 +60,9 @@ class sortCase(unittest.TestCase):
         answer = simplesorting.insertionsort(sortinput)
         assert answer == range(100)
 
+    def testMerge(self):
+        sorttestframework(mergesort.mergesort)
+
 def timeselection(abignumber):
     myinput = range(abignumber)
     random.shuffle(myinput)
@@ -57,17 +80,17 @@ def timeinsertion(abignumber):
     print "%d values in %s" % (abignumber, stop-start)
 
 if __name__ == "__main__":
-    timeselection(1000)
-    timeselection(2000)
-    timeselection(3000)
-    timeselection(4000)
-    timeselection(5000)
-    timeselection(6000)
-    timeinsertion(1000)
-    timeinsertion(2000)
-    timeinsertion(3000)
-    timeinsertion(4000)
-    timeinsertion(5000)
-    timeinsertion(6000)
+    # timeselection(1000)
+    # timeselection(2000)
+    # timeselection(3000)
+    # timeselection(4000)
+    # timeselection(5000)
+    # timeselection(6000)
+    # timeinsertion(1000)
+    # timeinsertion(2000)
+    # timeinsertion(3000)
+    # timeinsertion(4000)
+    # timeinsertion(5000)
+    # timeinsertion(6000)
 
     unittest.main()
