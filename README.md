@@ -55,3 +55,7 @@ SELECTION: simplesorting.py has the simple selection sort algorithm
 INSERT: simplesorting.py has the simple insert sort algorithm as a function
 it sorts the input in place and also returns it
 tested by sorttests.py, which also performs a naive runtime test on ranges 1000 through 6000, which is enough to clearly show that the speed increases by more for each consecutive 1000 value increase
+
+MERGESORT: mergesort.py, function mergesort(list). sorts in place but this seems to make the worst case run curiously slow.
+
+QUICKSORT: quicklysort.py, function speedysort(list). sorts in place quickly, but worst case scenario is very common (list already in order) and does not preserve order.
