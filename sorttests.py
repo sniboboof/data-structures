@@ -1,5 +1,6 @@
 import simplesorting
 import mergesort
+import sortquickly
 import unittest
 import random
 import time
@@ -62,6 +63,9 @@ class sortCase(unittest.TestCase):
 
     def testMerge(self):
         sorttestframework(mergesort.mergesort)
+
+    def testSpeedy(self):
+        sorttestframework(sortquickly.speedysort)
 
 def timeselection(abignumber):
     myinput = range(abignumber)
