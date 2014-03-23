@@ -4,6 +4,7 @@ import sortquickly
 import unittest
 import random
 import time
+import radixal
 
 def sorttestframework(sortfunction):
     answer = sortfunction([])
@@ -66,6 +67,43 @@ class sortCase(unittest.TestCase):
 
     def testSpeedy(self):
         sorttestframework(sortquickly.speedysort)
+
+    def testRadix(self):
+        #radix sort doesn't work with negative numbers
+        answer = radixal.radixsort([])
+        assert answer == []
+        answer = radixal.radixsort([0])
+        assert answer == [0]
+        answer = radixal.radixsort([0, 1])
+        assert answer == [0, 1]
+        answer = radixal.radixsort([1, 0])
+        assert answer == [0, 1]
+        answer = radixal.radixsort([1, 1, 0])
+        assert answer == [0, 1, 1]
+        answer = radixal.radixsort([5, 4, 2, 4, 7, 25, 12])
+        assert answer == [2, 4, 4, 5, 7, 12, 25]
+        sortinput = range(1000000)
+        random.shuffle(sortinput)
+        answer = radixal.radixsort(sortinput)
+        assert answer == range(1000000)
+
+    def testRadixString(self):
+        answer = radixal.radixsortstring([])
+        assert answer == []
+        answer = radixal.radixsortstring(["a"])
+        assert answer == ["a"]
+        answer = radixal.radixsortstring(["a", "b"])
+        assert answer == ["a", "b"]
+        answer = radixal.radixsortstring(["b", "a"])
+        assert answer == ["a", "b"]
+        answer = radixal.radixsortstring(["a", "bc"])
+        assert answer == ["a", "bc"]
+        answer = radixal.radixsortstring(["bc", "a"])
+        assert answer == ["a", "bc"]
+        answer = radixal.radixsortstring(["ab", "a", "bc"])
+        assert answer == ["a", "ab", "bc"]
+        answer = radixal.radixsortstring(["cae", "cad", "alphabet", "cad", "jack markley", "zylophone"])
+        assert answer == ["alphabet", "cad", "cad", "cae", "jack markley", "zylophone"]
 
 def timeselection(abignumber):
     myinput = range(abignumber)

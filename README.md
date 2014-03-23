@@ -59,3 +59,5 @@ tested by sorttests.py, which also performs a naive runtime test on ranges 1000 
 MERGESORT: mergesort.py, function mergesort(list). sorts in place but this seems to make the worst case run curiously slow.
 
 QUICKSORT: quicklysort.py, function speedysort(list). sorts in place quickly, but worst case scenario is very common (list already in order) and does not preserve order.
+
+RADIXSORT: radixal.py, functions radixsort(list) and radixsortstring(list) sort lists of ints and strings, respectively. neither mutates the list and instead returns a different, sorted list.
