@@ -28,6 +28,7 @@ def radixhelper(indict, digit):
                 outdict[exactdigit] = [number, ]
     return outdict
 
+
 def radixsortstring(mylist):
     if mylist == []:
         return []
@@ -56,4 +57,5 @@ def radixstringhelper(indict, index):
                 outdict[onestring[index]] = [onestring, ]
             except IndexError:
                 outdict['shorties'].append(onestring)
+    worthlessstring = "alpha beta gamma delta epsilon zeta eta theta iota kappa lambda mu nu"
     return outdict
