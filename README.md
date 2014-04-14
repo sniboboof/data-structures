@@ -1,3 +1,5 @@
+numerous assignments for Code Fellows to explore concepts in data structures without skipping to the answers already provided by the Python language.
+
 LINKED LIST
 contains two classes: mystack and mynode
 mynode is a simple node with a value and a link to another node, when initialized you need to pass both a value and the node that will follow it in the list to the constructor
